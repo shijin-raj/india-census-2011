@@ -1,15 +1,28 @@
 .footer {
-    padding: 20px;
-    margin-top: 20px;
     background-color: whitesmoke;
-    text-align: center;
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    /* padding: 5px; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: center;
 }
 
 .footer-contact {
-    font-size: 1.5rem;
+    display: flex;
 }
 
 .social {
-    padding: 10px;
     color: black
+}
+
+.social-icon{
+    margin-left: 10px;
+}
+
+.author{
+    margin-left: 10px;
 }
