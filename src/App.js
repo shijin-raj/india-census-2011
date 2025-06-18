@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       statewise_data: {},
-      india_data: {},
+      india_data: [],
       show_loading: false,
       state_meta: {},
     };
@@ -64,7 +64,8 @@ class App extends Component {
   };
   getDataFromAPI = () => {
     this.setState({ show_loading: true });
-    const api_url = "https://data.covid19india.org/v4/min/data.min.json";
+    // const api_url = "https://data.covid19india.org/v4/min/data.min.json";
+    const api_url =`${process.env.PUBLIC_URL}/data/data.json`;
     fetch(api_url, {
       method: "GET",
       mode: "cors",
@@ -73,15 +74,23 @@ class App extends Component {
         return res.json();
       })
       .then((data) => {
-        if (data.TT.total !== undefined) {
-          this.setState({ india_data: data.TT.total });
+        console.log(data);
+        let arr=[];
+        for(let i=0;i<10;i++){
+          arr.push(data[i]);
         }
-        let state_data = data;
-        delete state_data.TT;
-        if (state_data !== undefined) {
-          this.setState({ statewise_data: state_data });
-        }
+        this.setState({india_data:arr});
+        // if (data.TT.total !== undefined) {
+        //   this.setState({ india_data: data.TT.total });
+        // }
+        // let state_data = data;
+        // delete state_data.TT;
+        // if (state_data !== undefined) {
+        //   this.setState({ statewise_data: state_data });
+        // }
+        // this.setState({ show_loading: false });
         this.setState({ show_loading: false });
+
       })
       .catch((error) => {
         this.setState({ show_loading: false });
@@ -96,26 +105,36 @@ class App extends Component {
 
   getCardDetails() {
     var cards = [];
-    var state_list = Object.entries(this.state.statewise_data);
-    let formated_data = [];
-    state_list.forEach((item) => {
-      let s_meta = this.state.state_meta.find((detail) => {
-        return detail.state_code === item[0];
-      });
-      let f_data = {
-        state_code: item[0],
-        data: item[1],
-        state_name: s_meta.state_name,
-      };
-      cards.push(
-        <Card
-          key={f_data.state_code}
-          data={f_data.data}
-          title={f_data.state_name}
-        />
-      );
-      formated_data.push(f_data);
-    });
+    // var state_list = Object.entries(this.state.statewise_data);
+    // let formated_data = [];
+    let i=1;
+    this.state.india_data.forEach(item=>{
+      cards.push(<Card
+          key={i}
+          data={item}
+          title={item.name}
+        />);
+        i++;
+    })
+
+    // state_list.forEach((item) => {
+    //   let s_meta = this.state.state_meta.find((detail) => {
+    //     return detail.state_code === item[0];
+    //   });
+    //   let f_data = {
+    //     state_code: item[0],
+    //     data: item[1],
+    //     state_name: s_meta.state_name,
+    //   };
+    //   cards.push(
+    //     <Card
+    //       key={f_data.state_code}
+    //       data={f_data.data}
+    //       title={f_data.state_name}
+    //     />
+    //   );
+    //   formated_data.push(f_data);
+    // });
     return cards;
   }
 
@@ -128,9 +147,9 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <title> COVID - 19 React </title>{" "}
+        <title> 2011 Census - INDIA </title>{" "}
         <header>
-          <h1> COVID 19 TRACKER - INDIA </h1>{" "}
+          <h1> 2011 Census - INDIA </h1>{" "}
         </header>{" "}
         {cards?.length>0?cards:(<p>Sorry! Unable to fetch the data at the moment. Please try again later!</p>)} <Footer> </Footer>{" "}
       </div>
