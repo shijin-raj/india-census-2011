@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/india-census-2011/static/css/main.107b06b6.css",
+    "main.js": "/india-census-2011/static/js/main.143547e0.js",
+    "static/js/422.8794c7c1.chunk.js": "/india-census-2011/static/js/422.8794c7c1.chunk.js",
+    "index.html": "/india-census-2011/index.html",
+    "main.107b06b6.css.map": "/india-census-2011/static/css/main.107b06b6.css.map",
+    "main.143547e0.js.map": "/india-census-2011/static/js/main.143547e0.js.map",
+    "422.8794c7c1.chunk.js.map": "/india-census-2011/static/js/422.8794c7c1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.107b06b6.css",
+    "static/js/main.143547e0.js"
+  ]
+}
