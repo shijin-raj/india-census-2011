@@ -147,9 +147,9 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <title> 2011 Census - INDIA </title>{" "}
+        <title> INDIA : Census - 2011 </title>{" "}
         <header>
-          <h1> 2011 Census - INDIA </h1>{" "}
+          <h1> INDIA : Census - 2011 </h1>{" "}
         </header>{" "}
         {cards?.length>0?cards:(<p>Sorry! Unable to fetch the data at the moment. Please try again later!</p>)} <Footer> </Footer>{" "}
       </div>
