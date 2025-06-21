@@ -1,10 +1,18 @@
 .App {
     text-align: center;
+    padding: 1rem;
 }
 
 .App-logo {
     height: 40vmin;
     pointer-events: none;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {

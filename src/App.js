@@ -4,7 +4,10 @@ import "./App.css";
 import Card from "./components/Card";
 import Footer from "./components/footer/Footer";
 import LoadingScreen from "./components/loadingscreen/LoadingScreen";
+import { Divider, InputBase, Paper } from "@mui/material";
 // import CardButton from './components/CardButton';
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from '@mui/material/IconButton';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -65,7 +68,7 @@ class App extends Component {
   getDataFromAPI = () => {
     this.setState({ show_loading: true });
     // const api_url = "https://data.covid19india.org/v4/min/data.min.json";
-    const api_url =`${process.env.PUBLIC_URL}/data/data.json`;
+    const api_url = `${process.env.PUBLIC_URL}/data/data.json`;
     fetch(api_url, {
       method: "GET",
       mode: "cors",
@@ -75,22 +78,21 @@ class App extends Component {
       })
       .then((data) => {
         console.log(data);
-        let arr=[];
-        for(let i=0;i<10;i++){
+        let arr = [];
+        for (let i = 0; i < 10; i++) {
           arr.push(data[i]);
         }
-        this.setState({india_data:arr});
+        this.setState({ india_data: arr });
         // if (data.TT.total !== undefined) {
         //   this.setState({ india_data: data.TT.total });
         // }
         // let state_data = data;
         // delete state_data.TT;
         // if (state_data !== undefined) {
-        //   this.setState({ statewise_data: state_data });
+        //   this.setState({ statewise_data:   state_data });
         // }
         // this.setState({ show_loading: false });
         this.setState({ show_loading: false });
-
       })
       .catch((error) => {
         this.setState({ show_loading: false });
@@ -107,15 +109,11 @@ class App extends Component {
     var cards = [];
     // var state_list = Object.entries(this.state.statewise_data);
     // let formated_data = [];
-    let i=1;
-    this.state.india_data.forEach(item=>{
-      cards.push(<Card
-          key={i}
-          data={item}
-          title={item.name}
-        />);
-        i++;
-    })
+    let i = 1;
+    this.state.india_data.forEach((item) => {
+      cards.push(<Card key={i} data={item} title={item.name} />);
+      i++;
+    });
 
     // state_list.forEach((item) => {
     //   let s_meta = this.state.state_meta.find((detail) => {
@@ -151,7 +149,36 @@ class App extends Component {
         <header>
           <h1> INDIA : Census - 2011 </h1>{" "}
         </header>{" "}
-        {cards?.length>0?cards:(<p>Sorry! Unable to fetch the data at the moment. Please try again later!</p>)} <Footer> </Footer>{" "}
+        <Divider></Divider>
+        <div className="container">
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 400,
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search state/ district/ sub-district"
+              inputProps={{ "aria-label": "search google maps" }}
+            />
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </div>
+        {cards?.length > 0 ? (
+          cards
+        ) : (
+          <p>
+            Sorry! Unable to fetch the data at the moment. Please try again
+            later!
+          </p>
+        )}{" "}
+        <Footer> </Footer>{" "}
       </div>
     );
   }
